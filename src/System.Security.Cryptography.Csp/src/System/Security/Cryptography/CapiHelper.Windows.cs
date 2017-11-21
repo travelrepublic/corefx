@@ -977,8 +977,7 @@ namespace Internal.NativeCrypto
             int inputOffset,
             int inputCount,
             byte[] output,
-            int outputOffset,
-            int outputCount)
+            int outputOffset)
         {
             VerifyValidHandle(hKey);
             Debug.Assert(input != null);
@@ -987,8 +986,6 @@ namespace Internal.NativeCrypto
             Debug.Assert(inputCount <= input.Length - inputOffset);
             Debug.Assert(output != null);
             Debug.Assert(outputOffset >= 0);
-            Debug.Assert(outputCount >= 0);
-            Debug.Assert(outputCount <= output.Length - outputOffset);
             Debug.Assert((inputCount % 8) == 0);
 
             byte[] dataTobeDecrypted = new byte[inputCount];
@@ -1000,6 +997,7 @@ namespace Internal.NativeCrypto
             {
                 throw GetErrorCode().ToCryptographicException();
             }
+            Debug.Assert(decryptedDataLength <= output.Length);
 
             Buffer.BlockCopy(dataTobeDecrypted, 0, output, outputOffset, decryptedDataLength);
 

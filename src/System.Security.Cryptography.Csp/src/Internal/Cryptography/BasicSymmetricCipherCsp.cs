@@ -109,7 +109,7 @@ namespace Internal.Cryptography
             }
             else
             {
-                numBytesWritten = DecryptData(_hKey, input, inputOffset, count, output, outputOffset, output.Length - outputOffset);
+                numBytesWritten = DecryptData(_hKey, input, inputOffset, count, output, outputOffset);
             }
 
             return numBytesWritten;
